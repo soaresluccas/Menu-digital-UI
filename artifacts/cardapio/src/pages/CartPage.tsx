@@ -20,7 +20,7 @@ export function CartPage({ onCheckout }: CartPageProps) {
         </p>
         <h2
           className="text-white"
-          style={{ fontSize: 58, fontWeight: 900, textTransform: 'uppercase', letterSpacing: '-0.03em', lineHeight: 0.88 }}
+          style={{ fontSize: 'clamp(38px, 14vw, 58px)', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '-0.03em', lineHeight: 0.88 }}
         >
           PEDIDO.
         </h2>

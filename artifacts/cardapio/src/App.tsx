@@ -83,10 +83,12 @@ function App() {
           style={{ borderLeft: '1.5px solid var(--black)', borderRight: '1.5px solid var(--black)' }}
         >
           <div className="flex-1 overflow-y-auto overflow-x-hidden no-scrollbar w-full pb-[58px]">
-            {activePage === "home" && <HomePage navigate={navigate} />}
-            {activePage === "menu" && <MenuPage initialSubTab={subTab} />}
-            {activePage === "drinks" && <DrinksPage />}
-            {activePage === "cart" && <CartPage onCheckout={() => setShowOverlay(true)} />}
+            <div key={activePage} className="page-transition">
+              {activePage === "home" && <HomePage navigate={navigate} />}
+              {activePage === "menu" && <MenuPage initialSubTab={subTab} />}
+              {activePage === "drinks" && <DrinksPage />}
+              {activePage === "cart" && <CartPage onCheckout={() => setShowOverlay(true)} />}
+            </div>
           </div>
 
           <BottomNav activePage={activePage} onChangePage={navigate} />

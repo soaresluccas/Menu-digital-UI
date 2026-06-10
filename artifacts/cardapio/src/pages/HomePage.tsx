@@ -21,7 +21,7 @@ export function HomePage({ navigate }: HomePageProps) {
 
       {/* Giant Title */}
       <div className="w-full bg-[var(--black)] px-6 py-10">
-        <h1 className="text-[80px] leading-[0.8] font-black text-white tracking-[-0.04em]">
+        <h1 className="font-black text-white leading-[0.82] tracking-[-0.04em]" style={{ fontSize: 'clamp(36px, 13.5vw, 68px)' }}>
           CARDÁPIO.
         </h1>
       </div>
@@ -33,7 +33,7 @@ export function HomePage({ navigate }: HomePageProps) {
 
       {/* Blue Block */}
       <div className="w-full bg-[var(--blue)] px-6 py-10" style={{ borderBottom: '1.5px solid var(--black)' }}>
-        <h2 className="text-[42px] leading-[1] font-black text-white tracking-[-0.02em] mb-4">
+        <h2 className="font-black text-white leading-[1] tracking-[-0.02em] mb-4" style={{ fontSize: 'clamp(28px, 10vw, 42px)' }}>
           UM JANTAR FEITO COM AMOR.
         </h2>
         <p className="text-[var(--text-muted)] text-[12px] text-white/70 max-w-[280px]">

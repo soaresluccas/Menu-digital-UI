@@ -12,7 +12,7 @@ export function DrinksPage() {
         <span className="text-[10px] font-bold uppercase tracking-[0.1em] mb-2 opacity-80">
           Seção 03
         </span>
-        <h2 className="text-[58px] leading-[0.9] font-black tracking-[-0.03em] mb-4">
+        <h2 className="font-black leading-[0.9] tracking-[-0.03em] mb-4" style={{ fontSize: 'clamp(38px, 14vw, 58px)' }}>
           DRINKS.
         </h2>
         <span className="text-[10px] font-bold uppercase tracking-[0.1em] opacity-80">
