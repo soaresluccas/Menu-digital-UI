@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Cardápio — Nossa Noite</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&family=Playfair+Display:ital,wght@0,700;1,400;1,700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --black:#0C0C0C;
+  --white:#FFFFFF;
+  --cream:#F4F1E8;
+  --yellow:#FFE033;
+  --red:#E8003C;
+  --blue:#0042FF;
+  --green:#006B3C;
+  --purple:#6B00FF;
+  --lt-gray:#F0EFEA;
+  --mid-gray:#DDDBD3;
+  --border-c:#D0CEC6;
+  --text-main:#0C0C0C;
+  --text-muted:#888880;
+  --text-light:#AAAAAA;
+}
+html,body{
+  background:var(--cream);
+  color:var(--text-main);
+  font-family:'Inter',sans-serif;
+  height:100%;
+  overflow:hidden;
+}
+#app{
+  max-width:430px;
+  margin:0 auto;
+  height:100dvh;
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+  background:var(--cream);
+  position:relative;
+}
+.page{
+  flex:1;
+  overflow-y:auto;
+  overflow-x:hidden;
+  display:none;
+  flex-direction:column;
+  padding-bottom:68px;
+}
+.page.active{display:flex;}
+.page::-webkit-scrollbar{width:0;}
+
+/* ===========================
+   BOTTOM NAV — light, editorial
+=========================== */
+#bottom-nav{
+  height:58px;
+  background:var(--white);
+  border-top:1.5px solid var(--black);
+  display:flex;
+  align-items:stretch;
+  flex-shrink:0;
+  z-index:100;
+}
+.nav-btn{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:2px;
+  background:none;
+  border:none;
+  border-right:1px solid var(--border-c);
+  cursor:pointer;
+  color:var(--text-muted);
+  font-family:'Inter',sans-serif;
+  font-size:8px;
+  font-weight:700;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  transition:background 0.1s, color 0.1s;
+  -webkit-tap-highlight-color:transparent;
+  position:relative;
+}
+.nav-btn:last-child{border-right:none;}
+.nav-btn.active{background:var(--black);color:var(--white);}
+.nav-btn svg{width:18px;height:18px;stroke-width:1.5;}
+.nav-badge{
+  position:absolute;top:6px;right:calc(50% - 18px);
+  background:var(--red);color:#fff;
+  font-size:8px;font-weight:900;
+  width:14px;height:14px;border-radius:50%;
+  display:none;align-items:center;justify-content:center;
+}
+.nav-badge.show{display:flex;}
+
+/* ===========================
+   PAGE: HOME
+=========================== */
+/* HERO — black block with cream title like the reference header */
+.home-hero{
+  background:var(--cream);
+  border-bottom:1.5px solid var(--black);
+  padding:32px 20px 0 20px;
+  position:relative;
+  overflow:hidden;
+}
+.home-hero-label{
+  font-size:8px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;
+  color:var(--text-muted);margin-bottom:10px;
+  display:flex;align-items:center;gap:8px;
+}
+.home-hero-label::after{content:'';flex:1;height:1px;background:var(--border-c);}
+/* Giant MENU title — matches reference exactly */
+.home-hero-title{
+  font-size:80px;font-weight:900;line-height:0.85;
+  color:var(--black);text-transform:uppercase;letter-spacing:-0.04em;
+  background:var(--black);color:var(--cream);
+  margin:0 -20px;
+  padding:12px 20px 14px;
+}
+/* Colored band below title */
+.home-green-band{
+  background:var(--green);
+  height:36px;
+  display:flex;align-items:center;
+  padding:0 20px;
+  margin:0 -20px;
+  border-top:1.5px solid var(--black);
+  border-bottom:1.5px solid var(--black);
+}
+.home-green-band span{
+  font-size:9px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--white);
+}
+/* Blue hero content block */
+.home-blue-block{
+  background:var(--blue);
+  margin:0 -20px;
+  padding:24px 20px 28px;
+  border-bottom:1.5px solid var(--black);
+}
+.home-blue-block h2{
+  font-size:42px;font-weight:900;text-transform:uppercase;
+  letter-spacing:-0.03em;line-height:0.88;
+  color:var(--white);
+}
+.home-blue-block p{
+  margin-top:16px;font-size:12px;font-weight:400;
+  color:rgba(255,255,255,0.65);line-height:1.6;
+  max-width:260px;
+}
+/* NAV ROWS — like the left panel in reference: colored rows */
+.home-nav-rows{margin:0;display:flex;flex-direction:column;}
+.home-nav-row{
+  display:flex;align-items:center;
+  border-bottom:1.5px solid var(--black);
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+  transition:filter 0.1s;
+  min-height:52px;
+  text-decoration:none;
+  position:relative;
+}
+.home-nav-row:active{filter:brightness(0.92);}
+.home-nav-row-label{
+  flex:1;padding:0 20px;
+  font-size:15px;font-weight:700;
+  letter-spacing:-0.01em;
+}
+.home-nav-row-arrow{
+  width:52px;height:100%;
+  display:flex;align-items:center;justify-content:center;
+  border-left:1.5px solid var(--black);
+  flex-shrink:0;
+  font-size:14px;font-weight:900;
+}
+.home-nav-row-count{
+  font-size:9px;font-weight:700;letter-spacing:0.08em;
+  padding:0 16px 0 0;
+  color:inherit;
+  opacity:0.5;
+}
+
+/* nota */
+.home-note{
+  border-bottom:1.5px solid var(--black);
+  padding:20px 20px;
+  background:var(--cream);
+}
+.home-note-label{font-size:8px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-muted);margin-bottom:8px;}
+.home-note-text{font-size:12px;line-height:1.65;color:var(--text-muted);}
+.home-note-sig{font-family:'Playfair Display',serif;font-style:italic;font-size:20px;color:var(--text-main);margin-top:10px;}
+
+/* ===========================
+   LIST PAGE HEADER
+=========================== */
+.list-page-header{flex-shrink:0;}
+.list-hdr-top{
+  padding:28px 20px 22px;
+  border-bottom:1.5px solid var(--black);
+}
+.list-hdr-top .eyebrow{font-size:8px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;margin-bottom:8px;}
+.list-hdr-top h2{
+  font-size:58px;font-weight:900;text-transform:uppercase;
+  letter-spacing:-0.03em;line-height:0.88;
+}
+.list-hdr-top .sub{font-size:11px;font-weight:400;margin-top:10px;opacity:0.5;letter-spacing:0.06em;text-transform:uppercase;}
+
+/* ===========================
+   ITEM CARD — LikeLouis style
+=========================== */
+.item-card{
+  border-bottom:1.5px solid var(--black);
+  background:var(--white);
+  display:flex;flex-direction:column;
+}
+/* image area */
+.item-img{
+  width:100%;aspect-ratio:4/3;
+  background:var(--lt-gray);
+  border-bottom:1.5px solid var(--black);
+  position:relative;overflow:hidden;
+  flex-shrink:0;
+}
+.item-img img{width:100%;height:100%;object-fit:cover;display:block;}
+.item-img-ph{
+  width:100%;height:100%;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
+  cursor:pointer;
+}
+.item-img-ph svg{width:24px;height:24px;color:var(--mid-gray);}
+.item-img-ph span{font-size:9px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--mid-gray);}
+.item-img-input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
+/* content */
+.item-content{display:flex;flex:1;}
+.item-main{flex:1;padding:16px 18px;}
+.item-delivered{
+  font-size:8px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;
+  color:var(--text-muted);margin-bottom:8px;
+  line-height:1.4;
+}
+.item-name{
+  font-size:28px;font-weight:700;line-height:1.0;
+  letter-spacing:-0.02em;color:var(--text-main);
+}
+.item-name-serif{
+  font-family:'Playfair Display',serif;font-weight:700;font-style:normal;
+  font-size:28px;
+}
+.item-taste{
+  margin-top:12px;
+  font-size:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;
+  color:var(--text-muted);line-height:1.7;
+}
+.item-taste strong{color:var(--text-main);}
+.item-rating{
+  margin-top:10px;
+  font-size:10px;font-weight:700;letter-spacing:0.04em;
+  color:var(--text-main);
+}
+/* ORDER NOW side strip — like LikeLouis vertical "ORDER IT NOW >>>>>>>" */
+.item-side{
+  width:38px;flex-shrink:0;
+  border-left:1.5px solid var(--black);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+  transition:background 0.15s;
+}
+.item-side.added-state{background:var(--yellow);}
+.item-side-text{
+  writing-mode:vertical-rl;
+  text-orientation:mixed;
+  transform:rotate(180deg);
+  font-size:8px;font-weight:900;letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--text-main);
+  white-space:nowrap;
+  user-select:none;
+}
+.item-side.added-state .item-side-text{color:var(--black);}
+/* add to cart red strip at bottom — like "ADD TO CART" red block in LikeLouis */
+.item-footer{
+  border-top:1.5px solid var(--black);
+  display:flex;align-items:stretch;
+  min-height:44px;
+}
+.item-footer-qty{
+  flex:1;display:flex;align-items:center;
+  padding:0 16px;gap:0;
+  border-right:1.5px solid var(--black);
+}
+.qty-btn{
+  width:30px;height:30px;
+  background:none;border:1px solid var(--border-c);
+  color:var(--text-main);font-size:18px;font-weight:300;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  font-family:'Inter',sans-serif;
+  -webkit-tap-highlight-color:transparent;
+}
+.qty-num{
+  width:32px;height:30px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:700;
+  border-top:1px solid var(--border-c);
+  border-bottom:1px solid var(--border-c);
+}
+.item-add-btn{
+  background:var(--red);color:var(--white);
+  border:none;
+  width:120px;flex-shrink:0;
+  font-size:9px;font-weight:900;letter-spacing:0.18em;text-transform:uppercase;
+  cursor:pointer;font-family:'Inter',sans-serif;
+  -webkit-tap-highlight-color:transparent;
+  display:flex;align-items:center;justify-content:center;gap:6px;
+  transition:background 0.1s;
+}
+.item-add-btn.added{background:var(--green);}
+.item-add-btn svg{width:12px;height:12px;flex-shrink:0;}
+
+/* ===========================
+   DRINK CARD
+=========================== */
+.drink-card{
+  background:var(--white);
+  border-bottom:1.5px solid var(--black);
+  display:flex;align-items:stretch;
+}
+.drink-main{flex:1;padding:18px 18px;}
+.drink-delivered{font-size:8px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px;}
+.drink-name{font-size:26px;font-weight:900;letter-spacing:-0.02em;line-height:1;color:var(--text-main);}
+.drink-taste{margin-top:10px;font-size:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-muted);line-height:1.7;}
+.drink-taste strong{color:var(--text-main);}
+.drink-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;}
+.drink-tag{
+  font-size:9px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;
+  padding:3px 8px;border:1px solid var(--border-c);color:var(--text-muted);
+  border-radius:100px;
+}
+.drink-side{
+  width:38px;flex-shrink:0;
+  border-left:1.5px solid var(--black);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+  transition:background 0.15s;
+  position:relative;
+}
+.drink-side.added-state{background:var(--yellow);}
+.drink-qty-badge{
+  position:absolute;top:8px;left:50%;transform:translateX(-50%);
+  font-size:10px;font-weight:900;color:var(--black);
+  display:none;
+}
+.drink-qty-badge.show{display:block;}
+.drink-side-text{
+  writing-mode:vertical-rl;text-orientation:mixed;transform:rotate(180deg);
+  font-size:8px;font-weight:900;letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--text-main);white-space:nowrap;user-select:none;
+}
+
+/* ===========================
+   CART PAGE
+=========================== */
+.cart-hdr{
+  background:var(--red);
+  padding:28px 20px 20px;
+  border-bottom:1.5px solid var(--black);
+}
+.cart-hdr .eyebrow{font-size:8px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.6);margin-bottom:8px;}
+.cart-hdr h2{font-size:58px;font-weight:900;text-transform:uppercase;letter-spacing:-0.03em;line-height:0.88;color:var(--white);}
+
+.cart-empty{
+  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:10px;padding:40px 24px;text-align:center;
+}
+.cart-empty-sq{
+  width:52px;height:52px;border:1.5px solid var(--border-c);
+  display:flex;align-items:center;justify-content:center;
+}
+.cart-empty-sq svg{width:22px;height:22px;color:var(--mid-gray);}
+.cart-empty h3{font-size:20px;font-weight:900;text-transform:uppercase;letter-spacing:-0.02em;}
+.cart-empty p{font-size:12px;color:var(--text-muted);max-width:220px;line-height:1.5;}
+
+.cart-item{
+  display:flex;align-items:stretch;
+  border-bottom:1.5px solid var(--black);
+  background:var(--white);
+  min-height:64px;
+}
+.cart-item-num{
+  width:44px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-size:9px;font-weight:700;color:var(--text-muted);letter-spacing:0.1em;
+  border-right:1.5px solid var(--black);
+}
+.cart-item-body{flex:1;padding:14px 16px;}
+.cart-item-name{font-size:15px;font-weight:900;text-transform:uppercase;letter-spacing:-0.01em;}
+.cart-item-meta{font-size:10px;color:var(--text-muted);margin-top:2px;letter-spacing:0.06em;text-transform:uppercase;}
+.cart-item-ctrl{
+  display:flex;align-items:center;
+  padding:0 12px;gap:0;
+  border-left:1.5px solid var(--black);
+  flex-shrink:0;
+}
+.c-qty-btn{
+  width:26px;height:26px;background:none;border:1px solid var(--border-c);
+  color:var(--text-main);font-size:15px;font-weight:300;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  font-family:'Inter',sans-serif;-webkit-tap-highlight-color:transparent;
+}
+.c-qty-num{width:22px;text-align:center;font-size:12px;font-weight:700;}
+.cart-rm{
+  margin-left:8px;width:28px;height:28px;background:none;border:none;
+  color:var(--text-muted);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  -webkit-tap-highlight-color:transparent;
+}
+.cart-rm svg{width:13px;height:13px;}
+
+.cart-footer-wrap{
+  margin-top:auto;flex-shrink:0;
+  border-top:1.5px solid var(--black);
+  background:var(--cream);
+}
+.cart-totals{
+  padding:16px 20px 12px;
+  border-bottom:1.5px solid var(--black);
+}
+.cart-total-row{display:flex;justify-content:space-between;align-items:baseline;}
+.cart-total-label{font-size:9px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--text-muted);}
+.cart-total-val{font-size:32px;font-weight:900;letter-spacing:-0.03em;}
+.cart-total-names{font-size:10px;color:var(--text-muted);margin-top:4px;line-height:1.5;}
+.cart-confirm{
+  display:flex;align-items:stretch;
+  min-height:52px;
+}
+.cart-confirm-btn{
+  flex:1;background:var(--black);color:var(--white);border:none;
+  font-size:10px;font-weight:900;letter-spacing:0.2em;text-transform:uppercase;
+  cursor:pointer;font-family:'Inter',sans-serif;
+  -webkit-tap-highlight-color:transparent;
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  transition:background 0.1s;
+}
+.cart-confirm-btn:active{background:#222;}
+.cart-confirm-btn svg{width:14px;height:14px;}
+
+/* ===========================
+   ORDER OVERLAY
+=========================== */
+#order-overlay{
+  position:absolute;inset:0;
+  background:var(--cream);
+  z-index:999;display:none;
+  flex-direction:column;
+}
+#order-overlay.show{display:flex;}
+.order-top{
+  background:var(--black);
+  flex:1;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  text-align:center;padding:32px;
+}
+.order-check-sq{
+  width:72px;height:72px;
+  border:2px solid var(--yellow);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:28px;
+}
+.order-check-sq svg{width:30px;height:30px;color:var(--yellow);}
+.order-title{font-size:56px;font-weight:900;text-transform:uppercase;letter-spacing:-0.04em;line-height:0.88;color:var(--white);margin-bottom:16px;}
+.order-sub{font-size:13px;color:rgba(255,255,255,0.5);line-height:1.65;max-width:260px;}
+.order-back{
+  height:58px;background:var(--yellow);
+  border:none;
+  font-size:10px;font-weight:900;letter-spacing:0.2em;text-transform:uppercase;
+  cursor:pointer;font-family:'Inter',sans-serif;
+  border-top:1.5px solid var(--black);
+  width:100%;
+  flex-shrink:0;
+  color:var(--black);
+}
+
+/* ===========================
+   TOAST
+=========================== */
+#toast{
+  position:absolute;bottom:76px;left:50%;transform:translateX(-50%) translateY(10px);
+  background:var(--black);color:var(--white);
+  padding:9px 18px;
+  font-size:9px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;
+  white-space:nowrap;opacity:0;transition:opacity 0.2s,transform 0.2s;
+  pointer-events:none;z-index:200;
+  border:1.5px solid var(--black);
+}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* helper labels on colored rows */
+.row-purple{background:var(--purple);color:var(--white);}
+.row-blue-light{background:#4C79FF;color:var(--white);}
+.row-green{background:var(--green);color:var(--white);}
+.row-black{background:var(--black);color:var(--cream);}
+.row-cream{background:var(--cream);color:var(--text-main);}
+</style>
+</head>
+<body>
+<div id="app">
+
+<!-- ========================
+     PAGE: HOME
+======================== -->
+<div class="page active" id="page-home">
+  <!-- HERO -->
+  <div class="home-hero">
+    <div class="home-hero-label">Restaurante Privado · 12 Jun 2025</div>
+    <div class="home-hero-title">CARDÁPIO.</div>
+  </div>
+  <!-- green band -->
+  <div class="home-green-band" style="margin:0;">
+    <span>Nossa Noite Especial ♡</span>
+  </div>
+  <!-- blue hero block -->
+  <div class="home-blue-block">
+    <h2>UM JANTAR<br>FEITO COM<br>AMOR.</h2>
+    <p>Escolha sua entrada, prato e drinks. Tudo preparado na hora para você.</p>
+  </div>
+  <!-- nav rows — like the left sidebar in reference -->
+  <div class="home-nav-rows">
+    <button class="home-nav-row row-cream" onclick="goTo('entradas')">
+      <span class="home-nav-row-label">Entrada</span>
+      <span class="home-nav-row-count">1 item</span>
+      <span class="home-nav-row-arrow">→</span>
+    </button>
+    <button class="home-nav-row row-blue-light" onclick="goTo('pratos')">
+      <span class="home-nav-row-label">Pratos</span>
+      <span class="home-nav-row-count">1 item</span>
+      <span class="home-nav-row-arrow">→</span>
+    </button>
+    <button class="home-nav-row row-green" onclick="goTo('drinks')">
+      <span class="home-nav-row-label">Drinks</span>
+      <span class="home-nav-row-count">3 itens</span>
+      <span class="home-nav-row-arrow">→</span>
+    </button>
+    <button class="home-nav-row row-black" onclick="goTo('sobremesa')">
+      <span class="home-nav-row-label">Sobremesa</span>
+      <span class="home-nav-row-count">1 item</span>
+      <span class="home-nav-row-arrow">→</span>
+    </button>
+  </div>
+  <!-- nota -->
+  <div class="home-note">
+    <p class="home-note-label">Nota da Casa</p>
+    <p class="home-note-text">Este menu foi criado com cuidado e muito amor. Cada prato pensado para esta noite especial — feito por nós, para nós.</p>
+    <p class="home-note-sig">Com amor ♡</p>
+  </div>
+</div>
+
+<!-- ========================
+     PAGE: ENTRADAS
+======================== -->
+<div class="page" id="page-entradas">
+  <div class="list-page-header">
+    <div class="list-hdr-top" style="background:var(--cream);">
+      <p class="eyebrow" style="color:var(--text-muted);">Seção 01</p>
+      <h2 style="color:var(--black);">ENTRADA.</h2>
+      <p class="sub">1 item disponível</p>
+    </div>
+  </div>
+  <!-- item -->
+  <div class="item-card">
+    <div class="item-img">
+      <div class="item-img-ph" id="ph-e1">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+        <span>Adicionar foto</span>
+        <input type="file" accept="image/*" class="item-img-input" onchange="loadImg(event,'ph-e1')">
+      </div>
+    </div>
+    <div class="item-content">
+      <div class="item-main">
+        <p class="item-delivered">PARA COMPARTILHAR · QUENTE</p>
+        <h3 class="item-name">Assorti de<br>Fritos Finos</h3>
+        <div class="item-taste">
+          NOTAS DE SABOR:<br>
+          <strong>CROCANTE. DOURADO. LEVEMENTE SALGADO.</strong>
+        </div>
+        <div class="item-taste" style="margin-top:8px;">
+          SERVE 2 PESSOAS.
+        </div>
+        <p class="item-rating" style="margin-top:10px;">Petiscos fritos sortidos — pensados para abrir o apetite com leveza.</p>
+      </div>
+      <div class="item-side" id="side-e1" onclick="sideOrder('e1','Assorti de Fritos Finos','Entrada')">
+        <span class="item-side-text">PEDIR AGORA ↑↑↑↑↑</span>
+      </div>
+    </div>
+    <div class="item-footer">
+      <div class="item-footer-qty">
+        <button class="qty-btn" onclick="changeQty('e1',-1)">−</button>
+        <div class="qty-num" id="qty-e1">1</div>
+        <button class="qty-btn" onclick="changeQty('e1',1)">+</button>
+      </div>
+      <button class="item-add-btn" id="addbtn-e1" onclick="addFood('e1','Assorti de Fritos Finos','Entrada')">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+        Adicionar ao pedido
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ========================
+     PAGE: PRATOS
+======================== -->
+<div class="page" id="page-pratos">
+  <div class="list-page-header">
+    <div class="list-hdr-top" style="background:var(--blue);">
+      <p class="eyebrow" style="color:rgba(255,255,255,0.5);">Seção 02</p>
+      <h2 style="color:var(--white);">PRATOS.</h2>
+      <p class="sub" style="color:rgba(255,255,255,0.5);">1 item disponível</p>
+    </div>
+  </div>
+  <div class="item-card">
+    <div class="item-img">
+      <div class="item-img-ph" id="ph-p1">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+        <span>Adicionar foto</span>
+        <input type="file" accept="image/*" class="item-img-input" onchange="loadImg(event,'ph-p1')">
+      </div>
+    </div>
+    <div class="item-content">
+      <div class="item-main">
+        <p class="item-delivered">PRATO PRINCIPAL · QUENTE</p>
+        <h3 class="item-name"><span class="item-name-serif">Fettuccine</span><br>Alfredo com<br>Camarão</h3>
+        <div class="item-taste">
+          NOTAS DE SABOR:<br>
+          <strong>CREMOSO. FRESCO. ELEGANTE.</strong>
+        </div>
+        <div class="item-taste" style="margin-top:8px;">
+          TASTE NOTES:<br>
+          <strong>MACARRÃO FRESCO, MOLHO BRANCO AO QUEIJO E CAMARÃO SELADO NA MANTEIGA.</strong>
+        </div>
+      </div>
+      <div class="item-side" id="side-p1" onclick="sideOrder('p1','Fettuccine Alfredo com Camarão','Prato Principal')">
+        <span class="item-side-text">PEDIR AGORA ↑↑↑↑↑</span>
+      </div>
+    </div>
+    <div class="item-footer">
+      <div class="item-footer-qty">
+        <button class="qty-btn" onclick="changeQty('p1',-1)">−</button>
+        <div class="qty-num" id="qty-p1">1</div>
+        <button class="qty-btn" onclick="changeQty('p1',1)">+</button>
+      </div>
+      <button class="item-add-btn" id="addbtn-p1" onclick="addFood('p1','Fettuccine Alfredo com Camarão','Prato Principal')">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+        Adicionar ao pedido
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ========================
+     PAGE: SOBREMESA
+======================== -->
+<div class="page" id="page-sobremesa">
+  <div class="list-page-header">
+    <div class="list-hdr-top" style="background:var(--red);">
+      <p class="eyebrow" style="color:rgba(255,255,255,0.5);">Seção 04</p>
+      <h2 style="color:var(--white);">SOBREMESA.</h2>
+      <p class="sub" style="color:rgba(255,255,255,0.5);">1 item disponível</p>
+    </div>
+  </div>
+  <div class="item-card">
+    <div class="item-img">
+      <div class="item-img-ph" id="ph-s1">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+        <span>Adicionar foto</span>
+        <input type="file" accept="image/*" class="item-img-input" onchange="loadImg(event,'ph-s1')">
+      </div>
+    </div>
+    <div class="item-content">
+      <div class="item-main">
+        <p class="item-delivered">SOBREMESA · GELADO</p>
+        <h3 class="item-name"><span class="item-name-serif">Milky</span> Moo.</h3>
+        <div class="item-taste">
+          NOTAS DE SABOR:<br>
+          <strong>CREMOSO. FRIO. INESQUECÍVEL.</strong>
+        </div>
+        <p class="item-rating" style="margin-top:10px;">O melhor milkshake do mundo. Sem debate.</p>
+        <div class="item-taste" style="margin-top:10px;">SERVE 1 PESSOA.</div>
+      </div>
+      <div class="item-side" id="side-s1" onclick="sideOrder('s1','Milky Moo','Sobremesa')">
+        <span class="item-side-text">PEDIR AGORA ↑↑↑↑↑</span>
+      </div>
+    </div>
+    <div class="item-footer">
+      <div class="item-footer-qty">
+        <button class="qty-btn" onclick="changeQty('s1',-1)">−</button>
+        <div class="qty-num" id="qty-s1">1</div>
+        <button class="qty-btn" onclick="changeQty('s1',1)">+</button>
+      </div>
+      <button class="item-add-btn" id="addbtn-s1" onclick="addFood('s1','Milky Moo','Sobremesa')">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+        Adicionar ao pedido
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ========================
+     PAGE: DRINKS
+======================== -->
+<div class="page" id="page-drinks">
+  <div class="list-page-header">
+    <div class="list-hdr-top" style="background:var(--green);">
+      <p class="eyebrow" style="color:rgba(255,255,255,0.5);">Seção 03</p>
+      <h2 style="color:var(--white);">DRINKS.</h2>
+      <p class="sub" style="color:rgba(255,255,255,0.5);">3 itens disponíveis</p>
+    </div>
+  </div>
+
+  <!-- Cosmopolitan -->
+  <div class="drink-card">
+    <div class="drink-main">
+      <p class="drink-delivered">COCKTAIL · BASE VODKA</p>
+      <h3 class="drink-name">Cosmo-<br>politan</h3>
+      <div class="drink-taste">
+        NOTAS:<br>
+        <strong>CÍTRICO. ELEGANTE. VIBRANTE.</strong>
+      </div>
+      <div class="drink-taste" style="margin-top:6px;">LICOR DE LARANJA, VODKA E CRANBERRY.</div>
+      <div class="drink-tags">
+        <span class="drink-tag" style="border-color:var(--red);color:var(--red);">Cocktail</span>
+        <span class="drink-tag">Vodka base</span>
+      </div>
+    </div>
+    <div class="drink-side" id="dside-d1" onclick="drinkAdd('d1','Cosmopolitan','Cocktail')">
+      <span class="drink-qty-badge" id="dqty-d1"></span>
+      <span class="drink-side-text">PEDIR ↑↑↑↑↑</span>
+    </div>
+  </div>
+
+  <!-- Mojito -->
+  <div class="drink-card">
+    <div class="drink-main">
+      <p class="drink-delivered">COCKTAIL · BASE RUM</p>
+      <h3 class="drink-name">Mojito.</h3>
+      <div class="drink-taste">
+        NOTAS:<br>
+        <strong>FRESCO. HERBÁCEO. REFRESCANTE.</strong>
+      </div>
+      <div class="drink-taste" style="margin-top:6px;">RUM, HORTELÃ FRESCA E LIMÃO SICILIANO.</div>
+      <div class="drink-tags">
+        <span class="drink-tag" style="border-color:var(--green);color:var(--green);">Cocktail</span>
+        <span class="drink-tag">Rum base</span>
+      </div>
+    </div>
+    <div class="drink-side" id="dside-d2" onclick="drinkAdd('d2','Mojito','Cocktail')">
+      <span class="drink-qty-badge" id="dqty-d2"></span>
+      <span class="drink-side-text">PEDIR ↑↑↑↑↑</span>
+    </div>
+  </div>
+
+  <!-- Caipirinha -->
+  <div class="drink-card">
+    <div class="drink-main">
+      <p class="drink-delivered">NACIONAL · BASE CACHAÇA</p>
+      <h3 class="drink-name">Caipirinha.</h3>
+      <div class="drink-taste">
+        NOTAS:<br>
+        <strong>ÁCIDO. FRESCO. BRASILEIRO.</strong>
+      </div>
+      <div class="drink-taste" style="margin-top:6px;">LIMÃO GALEGO, LIMÃO SICILIANO, CACHAÇA E GELO.</div>
+      <div class="drink-tags">
+        <span class="drink-tag" style="border-color:#c8a000;color:#c8a000;">Nacional</span>
+        <span class="drink-tag">Cachaça base</span>
+      </div>
+    </div>
+    <div class="drink-side" id="dside-d3" onclick="drinkAdd('d3','Caipirinha','Nacional')">
+      <span class="drink-qty-badge" id="dqty-d3"></span>
+      <span class="drink-side-text">PEDIR ↑↑↑↑↑</span>
+    </div>
+  </div>
+
+  <!-- footer note -->
+  <div style="padding:18px 20px;border-bottom:1.5px solid var(--black);background:var(--white);">
+    <p style="font-size:9px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px;">Bar da Casa</p>
+    <p style="font-size:11px;color:var(--text-muted);line-height:1.65;">Todos os drinks são preparados na hora com ingredientes frescos. Beba com responsabilidade — aproveite a noite.</p>
+  </div>
+</div>
+
+<!-- ========================
+     PAGE: CARRINHO
+======================== -->
+<div class="page" id="page-cart">
+  <div class="cart-hdr">
+    <p class="eyebrow">Seu pedido</p>
+    <h2>PEDIDO.</h2>
+  </div>
+  <div class="cart-empty" id="cart-empty-state">
+    <div class="cart-empty-sq">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+    </div>
+    <h3>Nada aqui ainda.</h3>
+    <p>Navegue pelo cardápio e adicione os itens que desejar.</p>
+  </div>
+  <div id="cart-items-list"></div>
+  <div class="cart-footer-wrap" id="cart-footer" style="display:none;">
+    <div class="cart-totals">
+      <div class="cart-total-row">
+        <span class="cart-total-label">Total de itens</span>
+        <span class="cart-total-val" id="cart-total-count">0</span>
+      </div>
+      <p class="cart-total-names" id="cart-items-summary"></p>
+    </div>
+    <div class="cart-confirm">
+      <button class="cart-confirm-btn" onclick="confirmOrder()">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+        Confirmar pedido
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ========================
+     BOTTOM NAV
+======================== -->
+<nav id="bottom-nav">
+  <button class="nav-btn active" id="nav-home" onclick="goTo('home')">
+    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+    Início
+  </button>
+  <button class="nav-btn" id="nav-entradas" onclick="goTo('entradas')">
+    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+    Menu
+  </button>
+  <button class="nav-btn" id="nav-drinks" onclick="goTo('drinks')">
+    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+    Drinks
+  </button>
+  <button class="nav-btn" id="nav-cart" onclick="goTo('cart')">
+    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+    Pedido
+    <span class="nav-badge" id="cart-badge">0</span>
+  </button>
+</nav>
+
+<!-- ORDER OVERLAY -->
+<div id="order-overlay">
+  <div class="order-top">
+    <div class="order-check-sq">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+    </div>
+    <h2 class="order-title">PEDIDO<br>FEITO!</h2>
+    <p class="order-sub">Seu pedido foi registrado. A cozinha já está a postos — em breve tudo estará servido com amor.</p>
+  </div>
+  <button class="order-back" onclick="closeOverlay()">← Voltar ao cardápio</button>
+</div>
+
+<!-- TOAST -->
+<div id="toast"></div>
+</div>
+
+<script>
+const cart={};
+const quantities={};
+
+function goTo(page){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  const map={entradas:'entradas',pratos:'pratos',drinks:'drinks',sobremesa:'sobremesa',cart:'cart',home:'home'};
+  const pg=document.getElementById('page-'+(map[page]||page));
+  if(pg){pg.classList.add('active');pg.scrollTop=0;}
+  const navMap={entradas:'nav-entradas',pratos:'nav-entradas',sobremesa:'nav-entradas',drinks:'nav-drinks',cart:'nav-cart',home:'nav-home'};
+  const nb=document.getElementById(navMap[page]||'nav-home');
+  if(nb)nb.classList.add('active');
+}
+
+function changeQty(id,d){
+  if(!quantities[id])quantities[id]=1;
+  quantities[id]=Math.max(1,quantities[id]+d);
+  const el=document.getElementById('qty-'+id);
+  if(el)el.textContent=quantities[id];
+}
+
+function addFood(id,name,desc){
+  const qty=quantities[id]||1;
+  if(cart[id])cart[id].qty+=qty;
+  else cart[id]={name,desc,qty};
+  flashBtn('addbtn-'+id);
+  flashSide('side-'+id);
+  updateBadge();showToast(name+' adicionado');renderCart();
+}
+
+function sideOrder(id,name,desc){
+  addFood(id,name,desc);
+}
+
+function flashBtn(btnId){
+  const btn=document.getElementById(btnId);
+  if(!btn)return;
+  btn.classList.add('added');
+  btn.innerHTML='<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> Adicionado';
+  setTimeout(()=>{
+    btn.classList.remove('added');
+    btn.innerHTML='<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg> Adicionar ao pedido';
+  },1800);
+}
+
+function flashSide(sideId){
+  const s=document.getElementById(sideId);
+  if(!s)return;
+  s.classList.add('added-state');
+  setTimeout(()=>s.classList.remove('added-state'),1800);
+}
+
+function drinkAdd(id,name,type){
+  if(cart[id])cart[id].qty+=1;
+  else cart[id]={name,desc:type,qty:1};
+  const side=document.getElementById('dside-'+id);
+  const qbadge=document.getElementById('dqty-'+id);
+  if(side){side.classList.add('added-state');setTimeout(()=>side.classList.remove('added-state'),1000);}
+  if(qbadge){qbadge.textContent=cart[id].qty;qbadge.classList.add('show');}
+  updateBadge();showToast(name+' adicionado');renderCart();
+}
+
+function updateBadge(){
+  const total=Object.values(cart).reduce((s,i)=>s+i.qty,0);
+  const b=document.getElementById('cart-badge');
+  if(b){b.textContent=total;b.classList.toggle('show',total>0);}
+}
+
+function renderCart(){
+  const list=document.getElementById('cart-items-list');
+  const empty=document.getElementById('cart-empty-state');
+  const footer=document.getElementById('cart-footer');
+  if(!list)return;
+  const keys=Object.keys(cart);
+  if(keys.length===0){
+    list.innerHTML='';empty.style.display='flex';footer.style.display='none';return;
+  }
+  empty.style.display='none';footer.style.display='block';
+  let html='';
+  keys.forEach((key,i)=>{
+    const item=cart[key];
+    html+=`<div class="cart-item">
+      <div class="cart-item-num">${String(i+1).padStart(2,'0')}</div>
+      <div class="cart-item-body">
+        <div class="cart-item-name">${item.name}</div>
+        <div class="cart-item-meta">${item.desc}</div>
+      </div>
+      <div class="cart-item-ctrl">
+        <button class="c-qty-btn" onclick="cartChange('${key}',-1)">−</button>
+        <span class="c-qty-num">${item.qty}</span>
+        <button class="c-qty-btn" onclick="cartChange('${key}',1)">+</button>
+        <button class="cart-rm" onclick="cartRm('${key}')"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"/></svg></button>
+      </div>
+    </div>`;
+  });
+  list.innerHTML=html;
+  const total=Object.values(cart).reduce((s,i)=>s+i.qty,0);
+  document.getElementById('cart-total-count').textContent=total;
+  document.getElementById('cart-items-summary').textContent=Object.values(cart).map(i=>`${i.qty}× ${i.name}`).join(' · ');
+}
+
+function cartChange(key,d){
+  if(!cart[key])return;
+  cart[key].qty=Math.max(1,cart[key].qty+d);
+  updateBadge();renderCart();
+}
+
+function cartRm(key){
+  delete cart[key];
+  // update drink qty badge
+  const qbadge=document.getElementById('dqty-'+key);
+  if(qbadge){qbadge.classList.remove('show');qbadge.textContent='';}
+  updateBadge();renderCart();
+}
+
+function confirmOrder(){document.getElementById('order-overlay').classList.add('show');}
+function closeOverlay(){
+  Object.keys(cart).forEach(k=>delete cart[k]);
+  updateBadge();renderCart();
+  // clear drink badges
+  ['d1','d2','d3'].forEach(id=>{
+    const q=document.getElementById('dqty-'+id);
+    if(q){q.classList.remove('show');q.textContent='';}
+  });
+  document.getElementById('order-overlay').classList.remove('show');
+  goTo('home');
+}
+
+let toastTimer;
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>t.classList.remove('show'),2000);
+}
+
+function loadImg(event,phId){
+  const file=event.target.files[0];if(!file)return;
+  const reader=new FileReader();
+  reader.onload=function(e){
+    const ph=document.getElementById(phId);if(!ph)return;
+    const parent=ph.closest('.item-img');if(!parent)return;
+    const img=document.createElement('img');
+    img.src=e.target.result;
+    parent.innerHTML='';parent.appendChild(img);
+  };
+  reader.readAsDataURL(file);
+}
+
+renderCart();
+</script>
+</body>
+</html>

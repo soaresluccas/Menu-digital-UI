@@ -1,0 +1,41 @@
+quero fazer um cardápio digital temático para o dia dos namorados para uma noite onde vamos fazer de nossa casa um restaurante romantico sofisticado. Nós mesmo vamos produzir o que vamos consumir mas vamos manter uma simulação de restaurante.
+pensando nisso vamos usar um cardapio digital criado por mim, gostaria que me ajudasse com isso.
+Cardapio
+Assorti de Fritos Finos
+Petiscos fritos sortidos.
+Fettuccine Alfredo com Camarão
+Macarrão fresco, molho branco ao queijo e camarão.
+Milky moo
+O melhor milkshake do mundo.
+Cosmopolitan
+Licor fino de laranja, vodka, xarope de cranberry
+Mojito
+Run, hortelã e limão
+Caipirinha
+Limão galego, limão siciliano, cachaça e gelo
+use o design de UI que as imagens anexadas tem.
+Navegação com 4 páginas:
+Início — hero editorial com acesso rápido a cada seção
+Menu (Entradas / Pratos / Sobremesa) — itens detalhados com área de foto
+Drinks — layout horizontal com tags coloridas por tipo
+Pedido — carrinho com controle de quantidade e confirmação
+Funcionalidades de app:
+Adicionar e remover itens do pedido
+Contador de itens no ícone do carrinho
+Toast de confirmação ao adicionar
+Tela de confirmação de pedido com limpeza automática do carrinho
+Fotos: cada item tem um placeholder clicável — ao tocar/clicar, abre a galeria para você carregar a foto real do prato. Funciona no celular também.
+Para usar no celular: abra o arquivo HTML no navegador do smartphone — ele já está otimizado para mobile com max-width: 430px.
+Referência 1 (app de restaurante):
+Fundo branco/creme — não preto. O app é CLARO
+Blocos de cor sólida como seções inteiras (azul cobalto ocupa toda a área do hero, verde escuro é uma faixa de seção, roxo é um item de menu)
+Tipografia preta ultra-bold sobre fundo claro — não branca sobre escuro
+Itens de navegação são linhas horizontais com cor de fundo própria (verde, azul, roxo, preto)
+Pills/tags com borda arredondada, texto pequeno uppercase
+Referência 2 (LikeLouis):
+Fundo branco, tipografia preta pesada
+Texto "ORDER IT NOW >>>>>>>" vertical rotacionado
+Hairlines finas como separadores
+Blocos de cor (azul, amarelo) como elementos de destaque, não como fundo geral
+"ADD TO CART" é uma faixa vermelha vertical
+Tipografia mista: sans-serif bold para dados, serif para nomes de produtos
