@@ -1,0 +1,71 @@
+3:49:09 PM: Netlify Build                                                 
+3:49:09 PM: ────────────────────────────────────────────────────────────────
+3:49:09 PM: ​
+3:49:09 PM: ❯ Version
+3:49:09 PM:   @netlify/build 35.14.0
+3:49:09 PM: ​
+3:49:09 PM: ❯ Flags
+3:49:09 PM:   accountId: 6843432f17b3df2184a8e82a
+3:49:09 PM:   baseRelDir: true
+3:49:09 PM:   buildId: 6a29b19502d16e5bdc42c6dd
+3:49:09 PM:   deployId: 6a29b19502d16e5bdc42c6df
+3:49:09 PM:   packagePath: artifacts/cardapio
+3:49:09 PM: ​
+3:49:09 PM: ❯ Current directory
+3:49:09 PM:   /opt/build/repo
+3:49:09 PM: ​
+3:49:09 PM: ❯ Config file
+3:49:09 PM:   No config file was defined: using default values.
+3:49:09 PM: ​
+3:49:09 PM: ❯ Context
+3:49:09 PM:   production
+3:49:09 PM: ​
+3:49:09 PM: ❯ Installing extensions
+3:49:09 PM:    - neon
+3:49:23 PM: ​
+3:49:23 PM: ❯ Loading extensions
+3:49:23 PM:    - neon
+3:49:24 PM: ​
+3:49:24 PM: Build command from Netlify app                                
+3:49:24 PM: ────────────────────────────────────────────────────────────────
+3:49:24 PM: ​
+3:49:24 PM: $ pnpm --filter @workspace/cardapio... run build
+3:49:24 PM: Scope: 2 of 9 workspace projects
+3:49:24 PM: artifacts/cardapio build$ vite build --config vite.config.ts
+3:49:25 PM: Failed during stage 'building site': Build script returned non-zero exit code: 2 (https://ntl.fyi/exit-code-2)
+3:49:25 PM: artifacts/cardapio build: failed to load config from /opt/build/repo/artifacts/cardapio/vite.config.ts
+3:49:25 PM: artifacts/cardapio build: error during build:
+3:49:25 PM: artifacts/cardapio build: Error: PORT environment variable is required but was not provided.
+3:49:25 PM: artifacts/cardapio build:     at file:///opt/build/repo/artifacts/cardapio/node_modules/.vite-temp/vite.config.ts.timestamp-1781117365084-fc115ab00eba6.mjs:10:9
+3:49:25 PM: artifacts/cardapio build:     at ModuleJob.run (node:internal/modules/esm/module_job:343:25)
+3:49:25 PM: artifacts/cardapio build:     at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:681:26)
+3:49:25 PM: artifacts/cardapio build:     at async loadConfigFromBundledFile (file:///opt/build/repo/node_modules/.pnpm/vite@7.3.3_@types+node@25.6.2_jiti@2.7.0_lightningcss@1.32.0_tsx@4.21.0_yaml@2.8.4/node_modules/vite/dist/node/chunks/config.js:35936:12)
+3:49:25 PM: artifacts/cardapio build:     at async bundleAndLoadConfigFile (file:///opt/build/repo/node_modules/.pnpm/vite@7.3.3_@types+node@25.6.2_jiti@2.7.0_lightningcss@1.32.0_tsx@4.21.0_yaml@2.8.4/node_modules/vite/dist/node/chunks/config.js:35824:17)
+3:49:25 PM: artifacts/cardapio build:     at async loadConfigFromFile (file:///opt/build/repo/node_modules/.pnpm/vite@7.3.3_@types+node@25.6.2_jiti@2.7.0_lightningcss@1.32.0_tsx@4.21.0_yaml@2.8.4/node_modules/vite/dist/node/chunks/config.js:35791:42)
+3:49:25 PM: artifacts/cardapio build:     at async resolveConfig (file:///opt/build/repo/node_modules/.pnpm/vite@7.3.3_@types+node@25.6.2_jiti@2.7.0_lightningcss@1.32.0_tsx@4.21.0_yaml@2.8.4/node_modules/vite/dist/node/chunks/config.js:35440:22)
+3:49:25 PM: artifacts/cardapio build:     at async createBuilder (file:///opt/build/repo/node_modules/.pnpm/vite@7.3.3_@types+node@25.6.2_jiti@2.7.0_lightningcss@1.32.0_tsx@4.21.0_yaml@2.8.4/node_modules/vite/dist/node/chunks/config.js:33895:19)
+3:49:25 PM: artifacts/cardapio build:     at async CAC.<anonymous> (file:///opt/build/repo/node_modules/.pnpm/vite@7.3.3_@types+node@25.6.2_jiti@2.7.0_lightningcss@1.32.0_tsx@4.21.0_yaml@2.8.4/node_modules/vite/dist/node/cli.js:629:10)
+3:49:25 PM: artifacts/cardapio build: Failed
+3:49:25 PM: /opt/build/repo/artifacts/cardapio:
+3:49:25 PM:  ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL  @workspace/cardapio@0.0.0 build: `vite build --config vite.config.ts`
+3:49:25 PM: Exit status 1
+3:49:25 PM: ​
+3:49:25 PM: "build.command" failed                                        
+3:49:25 PM: ────────────────────────────────────────────────────────────────
+3:49:25 PM: ​
+3:49:25 PM:   Error message
+3:49:25 PM:   Command failed with exit code 1: pnpm --filter @workspace/cardapio... run build (https://ntl.fyi/exit-code-1)
+3:49:25 PM: ​
+3:49:25 PM:   Error location
+3:49:25 PM:   In Build command from Netlify app:
+3:49:25 PM:   pnpm --filter @workspace/cardapio... run build
+3:49:25 PM: ​
+3:49:25 PM:   Resolved config
+3:49:25 PM:   build:
+3:49:25 PM:     command: pnpm --filter @workspace/cardapio... run build
+3:49:25 PM:     commandOrigin: ui
+3:49:25 PM:     publish: /opt/build/repo/artifacts/cardapio/dist
+3:49:25 PM:     publishOrigin: ui
+3:49:25 PM: Build failed due to a user error: Build script returned non-zero exit code: 2
+3:49:25 PM: Failing build: Failed to build site
+3:49:26 PM: Finished processing build request in 31.441s
