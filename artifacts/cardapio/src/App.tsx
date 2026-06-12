@@ -1,4 +1,4 @@
-import { useState, useReducer } from "react";
+import { useState, useReducer, useRef, useEffect } from "react";
 import { Toaster } from "sonner";
 import { BottomNav } from "@/components/BottomNav";
 import { HomePage } from "@/pages/HomePage";
@@ -54,6 +54,7 @@ function App() {
   const [showSplash, setShowSplash] = useState(true);
   const [showIntro, setShowIntro] = useState(false);
   const [activePage, setActivePage] = useState("home");
+  const scrollRef = useRef<HTMLDivElement>(null);
   const [subTab, setSubTab] = useState<string | undefined>(undefined);
   const [showOverlay, setShowOverlay] = useState(false);
   const [cartState, dispatch] = useReducer(cartReducer, { items: [] });
@@ -67,6 +68,10 @@ function App() {
     clearCart: () => dispatch({ type: 'CLEAR_CART' }),
     totalCount: cartState.items.reduce((sum, i) => sum + i.qty, 0),
   };
+
+  useEffect(() => {
+    scrollRef.current?.scrollTo({ top: 0 });
+  }, [activePage]);
 
   const navigate = (page: string, sub?: string) => {
     setActivePage(page);
@@ -96,7 +101,7 @@ function App() {
             </div>
           ) : (
             <>
-              <div className="flex-1 overflow-y-auto overflow-x-hidden no-scrollbar w-full pb-[58px]">
+              <div ref={scrollRef} className="flex-1 overflow-y-auto overflow-x-hidden no-scrollbar w-full pb-[58px]">
                 <div key={activePage} className="page-transition">
                   {activePage === "home" && <HomePage navigate={navigate} />}
                   {activePage === "menu" && <MenuPage initialSubTab={subTab} />}
