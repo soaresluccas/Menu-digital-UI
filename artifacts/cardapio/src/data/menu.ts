@@ -11,11 +11,11 @@ export const foodItems = [
   },
   {
     id: 'p1', category: 'prato', section: 'Seção 02', sectionLabel: 'PRATOS.',
-    name: 'Fettuccine Alfredo com Camarão',
+    name: 'Lasanha Alfredo com Camarão',
     nameStyle: 'serif',
     tag: 'PRATO PRINCIPAL · QUENTE',
     tasteNotes: 'CREMOSO. FRESCO. ELEGANTE.',
-    description: 'Macarrão fresco, molho branco ao queijo e camarão selado na manteiga.',
+    description: 'Camarão selado na manteiga com passata de tomate, molho branco ao queijo, massa caseira de lasanha e muito queijo.',
     headerBg: '#0042FF', headerColor: '#FFFFFF',
   },
   {
