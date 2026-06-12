@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Até a próxima — Nossa Noite</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Anton&family=Playfair+Display:ital,wght@1,400;1,700&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --red:#E8003C;
+  --yellow:#FFE033;
+  --white:#FFFFFF;
+  --black:#0C0C0C;
+  --cream:#F4F1E8;
+  --blue:#0042FF;
+  --green:#006B3C;
+}
+html,body{height:100%;font-family:'Inter',sans-serif;overflow:hidden;}
+#app{
+  max-width:430px;margin:0 auto;
+  height:100dvh;height:100vh;
+  position:relative;overflow:hidden;
+  background:var(--red);
+}
+.screen{
+  position:absolute;inset:0;
+  display:none;
+  flex-direction:column;
+  opacity:0;
+  width:100%;height:100%;
+  z-index:1;
+}
+.screen.active{
+  display:flex;
+  opacity:1;
+  z-index:2;
+}
+
+/* ===========================
+   SCREEN 1: DESPEDIDA
+=========================== */
+#screen-1{background:var(--red);overflow:hidden;}
+.marquee-track{
+  position:absolute;
+  white-space:nowrap;
+  display:flex;
+  align-items:center;
+  will-change:transform;
+}
+.marquee-track span{
+  display:inline-flex;align-items:center;
+  padding:0 28px;
+  flex-shrink:0;
+}
+/* Row variants - different fonts/sizes/colors per the typography reference */
+.row-1{
+  top:6%;
+  font-family:'Archivo Black',sans-serif;
+  font-size:54px;
+  color:var(--yellow);
+  letter-spacing:-0.02em;
+  animation:scrollLeft 22s linear infinite;
+}
+.row-2{
+  top:22%;
+  font-family:'Anton',sans-serif;
+  font-size:38px;
+  color:var(--white);
+  letter-spacing:0.02em;
+  animation:scrollRight 18s linear infinite;
+}
+.row-3{
+  top:40%;
+  font-family:'Archivo Black',sans-serif;
+  font-size:72px;
+  color:var(--yellow);
+  letter-spacing:-0.03em;
+  font-style:italic;
+  animation:scrollLeft 28s linear infinite;
+}
+.row-4{
+  top:58%;
+  font-family:'Anton',sans-serif;
+  font-size:34px;
+  color:var(--white);
+  letter-spacing:0.04em;
+  animation:scrollRight 16s linear infinite;
+}
+.row-5{
+  top:74%;
+  font-family:'Archivo Black',sans-serif;
+  font-size:48px;
+  color:var(--yellow);
+  letter-spacing:-0.02em;
+  animation:scrollLeft 24s linear infinite;
+}
+.row-6{
+  top:90%;
+  font-family:'Anton',sans-serif;
+  font-size:30px;
+  color:var(--white);
+  letter-spacing:0.03em;
+  animation:scrollRight 14s linear infinite;
+}
+
+@keyframes scrollLeft{
+  from{transform:translateX(0);}
+  to{transform:translateX(-50%);}
+}
+@keyframes scrollRight{
+  from{transform:translateX(-50%);}
+  to{transform:translateX(0);}
+}
+
+/* PLAY button center */
+.play-wrap{
+  position:absolute;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  z-index:20;
+}
+.play-btn{
+  width:120px;height:120px;
+  background:var(--black);
+  border:3px solid var(--white);
+  color:var(--white);
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  gap:6px;
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+  font-family:'Inter',sans-serif;
+  transition:transform 0.1s, background 0.1s;
+  box-shadow:0 0 0 8px var(--red), 0 0 0 11px var(--white);
+}
+.play-btn:active{transform:scale(0.95);background:var(--yellow);color:var(--black);}
+.play-btn svg{width:32px;height:32px;}
+.play-btn span{
+  font-size:10px;font-weight:900;letter-spacing:0.22em;text-transform:uppercase;
+}
+
+/* ===========================
+   SCREEN 2: POLAROID
+=========================== */
+#screen-2{
+  background:var(--blue);
+  align-items:center;justify-content:center;
+  position:relative;
+}
+.scribble-svg{
+  position:absolute;
+  pointer-events:none;
+}
+.scribble-1{top:6%;left:-8%;width:200px;}
+.scribble-2{top:8%;right:-10%;width:170px;transform:rotate(20deg);}
+.scribble-3{bottom:10%;left:-10%;width:190px;transform:rotate(-15deg) scaleY(-1);}
+.scribble-4{bottom:4%;right:-6%;width:220px;transform:rotate(150deg);}
+.scribble-5{top:42%;left:2%;width:90px;transform:rotate(45deg);}
+
+.s2-header{
+  position:absolute;top:0;left:0;right:0;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:24px 24px 0;
+  z-index:5;
+}
+.s2-eyebrow{
+  font-size:9px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;
+  color:var(--white);opacity:0.6;
+}
+.s2-back{
+  background:none;border:1.5px solid var(--white);
+  width:36px;height:36px;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;-webkit-tap-highlight-color:transparent;
+  color:var(--white);
+}
+.s2-back svg{width:16px;height:16px;}
+
+/* polaroid card */
+.polaroid{
+  width:280px;
+  background:var(--white);
+  padding:18px 18px 60px;
+  box-shadow:0 4px 0 rgba(0,0,0,0.06);
+  position:relative;
+  z-index:5;
+  transform:rotate(-1.5deg);
+  border:1.5px solid var(--black);
+}
+.polaroid-photo{
+  width:100%;
+  aspect-ratio:1/1;
+  background:var(--black);
+  position:relative;
+  overflow:hidden;
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+}
+.polaroid-photo img{
+  width:100%;height:100%;
+  object-fit:cover;display:block;
+}
+.polaroid-photo-ph{
+  width:100%;height:100%;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:10px;
+  background:repeating-linear-gradient(45deg, #1a1a1a 0px, #1a1a1a 10px, #0c0c0c 10px, #0c0c0c 20px);
+}
+.polaroid-photo-ph svg{width:32px;height:32px;color:rgba(255,255,255,0.5);}
+.polaroid-photo-ph span{
+  font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;
+  color:rgba(255,255,255,0.6);text-align:center;padding:0 20px;
+}
+.polaroid-photo-input{
+  position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;
+}
+.polaroid-caption{
+  margin-top:18px;
+  text-align:center;
+  font-family:'Playfair Display',serif;
+  font-style:italic;font-weight:700;
+  font-size:22px;
+  color:var(--black);
+}
+.polaroid-sub{
+  margin-top:6px;text-align:center;
+  font-size:9px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;
+  color:rgba(0,0,0,0.35);
+}
+
+</style>
+</head>
+<body>
+<div id="app">
+
+  <!-- ===========================
+       SCREEN 1
+  =========================== -->
+  <div class="screen active" id="screen-1">
+    <div class="marquee-track row-1">
+      <span>GOSTOU DA EXPERIÊNCIA?</span><span>GOSTOU DA EXPERIÊNCIA?</span>
+    </div>
+    <div class="marquee-track row-2">
+      <span>VOU SENTIR SAUDADES!</span><span>VOU SENTIR SAUDADES!</span>
+    </div>
+    <div class="marquee-track row-3">
+      <span>O CASAL MAIS LINDO!</span><span>O CASAL MAIS LINDO!</span>
+    </div>
+    <div class="marquee-track row-4">
+      <span>VOCÊS SÃO A DUPLA DE PROTAGONISTAS</span><span>VOCÊS SÃO A DUPLA DE PROTAGONISTAS</span>
+    </div>
+    <div class="marquee-track row-5">
+      <span>A CASA AGRADECE SUA PRESENÇA</span><span>A CASA AGRADECE SUA PRESENÇA</span>
+    </div>
+    <div class="marquee-track row-6">
+      <span>DIVARAMMM! · DIVARAMMM! · DIVARAMMM!</span><span>DIVARAMMM! · DIVARAMMM! · DIVARAMMM!</span>
+    </div>
+
+    <div class="play-wrap">
+      <button class="play-btn" onclick="goTo(2)">
+        <svg fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        <span>Play</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ===========================
+       SCREEN 2
+  =========================== -->
+  <div class="screen" id="screen-2">
+
+    <!-- decorative scribbles -->
+    <svg class="scribble-svg scribble-1" viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M10 80 C 40 20, 80 130, 120 50 C 150 -10, 170 100, 195 60" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
+    </svg>
+    <svg class="scribble-svg scribble-2" viewBox="0 0 180 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M5 30 C 50 90, 70 -10, 110 50 C 140 100, 160 20, 175 70" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
+      <circle cx="160" cy="30" r="10" stroke="#FFFFFF" stroke-width="2" fill="none" opacity="0.6"/>
+    </svg>
+    <svg class="scribble-svg scribble-3" viewBox="0 0 190 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M5 50 C 60 10, 50 120, 100 70 C 140 30, 160 110, 185 60" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
+    </svg>
+    <svg class="scribble-svg scribble-4" viewBox="0 0 220 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M10 90 C 60 30, 90 140, 140 70 C 170 30, 190 110, 215 80" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
+      <path d="M30 30 L 50 50 M50 30 L30 50" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
+    </svg>
+    <svg class="scribble-svg scribble-5" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M50 5 L50 95 M5 50 L95 50 M18 18 L82 82 M82 18 L18 82" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" opacity="0.4"/>
+    </svg>
+
+    <div class="s2-header">
+      <span class="s2-eyebrow">Lembrança da Noite</span>
+      <button class="s2-back" onclick="goTo(1)">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+
+    <div class="polaroid">
+      <div class="polaroid-photo" id="photo-frame">
+        <div class="polaroid-photo-ph" id="photo-placeholder">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+          <span>Toque para adicionar a foto da noite</span>
+          <input type="file" accept="image/*" class="polaroid-photo-input" onchange="loadPhoto(event)">
+        </div>
+      </div>
+      <p class="polaroid-caption">Nossa noite ♡</p>
+      <p class="polaroid-sub">12 · Jun · 2025</p>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+function goTo(n){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById('screen-'+n).classList.add('active');
+}
+
+function loadPhoto(event){
+  const file=event.target.files[0];
+  if(!file)return;
+  const reader=new FileReader();
+  reader.onload=function(e){
+    const frame=document.getElementById('photo-frame');
+    frame.innerHTML='<img src="'+e.target.result+'" alt="Foto da noite">';
+  };
+  reader.readAsDataURL(file);
+}
+</script>
+</body>
+</html>

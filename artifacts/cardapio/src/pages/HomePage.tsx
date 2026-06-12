@@ -16,6 +16,13 @@ export function HomePage({ navigate }: HomePageProps) {
         <div className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-[0.1em] flex items-center gap-2 mb-6">
           <span>Restaurante Privado · 2026</span>
           <div className="flex-1 h-[1px] bg-[var(--border-c)]"></div>
+          <button
+            onClick={() => navigate('despedida')}
+            className="shrink-0 text-[8.5px] font-black uppercase tracking-[0.14em] text-[var(--red)] border border-[var(--red)] px-2 py-1 leading-none"
+            style={{ WebkitTapHighlightColor: 'transparent' }}
+          >
+            Finalizar Experiência
+          </button>
         </div>
       </div>
 

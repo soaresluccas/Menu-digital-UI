@@ -9,6 +9,8 @@ import { SplashPage } from "@/pages/SplashPage";
 import { IntroPage } from "@/pages/IntroPage";
 import { OrderOverlay } from "@/components/OrderOverlay";
 import { CartContext, CartItem } from "@/store/cart";
+import { DespedidaPage } from "@/pages/DespedidaPage";
+import { PolaroidPage } from "@/pages/PolaroidPage";
 
 interface CartState {
   items: CartItem[];
@@ -98,6 +100,14 @@ function App() {
           ) : showIntro ? (
             <div className="flex-1 overflow-hidden w-full">
               <IntroPage onFinish={() => setShowIntro(false)} />
+            </div>
+          ) : activePage === "despedida" ? (
+            <div className="flex-1 overflow-hidden w-full">
+              <DespedidaPage onPlay={() => navigate("polaroid")} />
+            </div>
+          ) : activePage === "polaroid" ? (
+            <div className="flex-1 overflow-hidden w-full">
+              <PolaroidPage onBack={() => navigate("despedida")} />
             </div>
           ) : (
             <>
