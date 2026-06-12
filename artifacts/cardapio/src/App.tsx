@@ -5,6 +5,7 @@ import { HomePage } from "@/pages/HomePage";
 import { MenuPage } from "@/pages/MenuPage";
 import { DrinksPage } from "@/pages/DrinksPage";
 import { CartPage } from "@/pages/CartPage";
+import { SplashPage } from "@/pages/SplashPage";
 import { OrderOverlay } from "@/components/OrderOverlay";
 import { CartContext, CartItem } from "@/store/cart";
 
@@ -49,6 +50,7 @@ function cartReducer(state: CartState, action: CartAction): CartState {
 }
 
 function App() {
+  const [showSplash, setShowSplash] = useState(true);
   const [activePage, setActivePage] = useState("home");
   const [subTab, setSubTab] = useState<string | undefined>(undefined);
   const [showOverlay, setShowOverlay] = useState(false);
@@ -82,18 +84,26 @@ function App() {
           className="w-full max-w-[430px] h-[100dvh] relative flex flex-col bg-[var(--cream)]"
           style={{ borderLeft: '1.5px solid var(--black)', borderRight: '1.5px solid var(--black)' }}
         >
-          <div className="flex-1 overflow-y-auto overflow-x-hidden no-scrollbar w-full pb-[58px]">
-            <div key={activePage} className="page-transition">
-              {activePage === "home" && <HomePage navigate={navigate} />}
-              {activePage === "menu" && <MenuPage initialSubTab={subTab} />}
-              {activePage === "drinks" && <DrinksPage />}
-              {activePage === "cart" && <CartPage onCheckout={() => setShowOverlay(true)} />}
+          {showSplash ? (
+            <div className="flex-1 overflow-y-auto overflow-x-hidden no-scrollbar w-full">
+              <SplashPage onStart={() => setShowSplash(false)} />
             </div>
-          </div>
+          ) : (
+            <>
+              <div className="flex-1 overflow-y-auto overflow-x-hidden no-scrollbar w-full pb-[58px]">
+                <div key={activePage} className="page-transition">
+                  {activePage === "home" && <HomePage navigate={navigate} />}
+                  {activePage === "menu" && <MenuPage initialSubTab={subTab} />}
+                  {activePage === "drinks" && <DrinksPage />}
+                  {activePage === "cart" && <CartPage onCheckout={() => setShowOverlay(true)} />}
+                </div>
+              </div>
 
-          <BottomNav activePage={activePage} onChangePage={navigate} />
+              <BottomNav activePage={activePage} onChangePage={navigate} />
 
-          {showOverlay && <OrderOverlay onClose={handleCloseOverlay} />}
+              {showOverlay && <OrderOverlay onClose={handleCloseOverlay} />}
+            </>
+          )}
         </div>
 
         <Toaster
