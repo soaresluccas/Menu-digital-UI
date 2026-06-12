@@ -6,6 +6,7 @@ import { MenuPage } from "@/pages/MenuPage";
 import { DrinksPage } from "@/pages/DrinksPage";
 import { CartPage } from "@/pages/CartPage";
 import { SplashPage } from "@/pages/SplashPage";
+import { IntroPage } from "@/pages/IntroPage";
 import { OrderOverlay } from "@/components/OrderOverlay";
 import { CartContext, CartItem } from "@/store/cart";
 
@@ -51,6 +52,7 @@ function cartReducer(state: CartState, action: CartAction): CartState {
 
 function App() {
   const [showSplash, setShowSplash] = useState(true);
+  const [showIntro, setShowIntro] = useState(false);
   const [activePage, setActivePage] = useState("home");
   const [subTab, setSubTab] = useState<string | undefined>(undefined);
   const [showOverlay, setShowOverlay] = useState(false);
@@ -86,7 +88,11 @@ function App() {
         >
           {showSplash ? (
             <div className="flex-1 overflow-y-auto overflow-x-hidden no-scrollbar w-full">
-              <SplashPage onStart={() => setShowSplash(false)} />
+              <SplashPage onStart={() => { setShowSplash(false); setShowIntro(true); }} />
+            </div>
+          ) : showIntro ? (
+            <div className="flex-1 overflow-hidden w-full">
+              <IntroPage onFinish={() => setShowIntro(false)} />
             </div>
           ) : (
             <>

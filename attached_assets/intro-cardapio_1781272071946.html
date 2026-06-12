@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Intro — Nossa Noite</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Anton&family=Archivo+Black&family=Bebas+Neue&family=Oswald:wght@300;700&family=Playfair+Display:ital,wght@0,700;1,400;1,900&family=Space+Mono:wght@400;700&family=Fascinate+Inline&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --black:#0C0C0C;
+  --white:#FFFFFF;
+  --cream:#F4F1E8;
+  --yellow:#FFE033;
+  --red:#E8003C;
+  --blue:#0042FF;
+  --green:#006B3C;
+  --purple:#6B00FF;
+}
+html,body{
+  height:100%;
+  overflow:hidden;
+  font-family:'Inter',sans-serif;
+}
+#stage{
+  max-width:430px;
+  margin:0 auto;
+  height:100dvh;
+  height:100vh;
+  position:relative;
+  overflow:hidden;
+  background:var(--black);
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+  user-select:none;
+}
+.frame{
+  position:absolute;inset:0;
+  display:flex;
+  align-items:center;justify-content:center;
+  opacity:0;
+  pointer-events:none;
+}
+.frame.active{opacity:1;}
+/* COUNTDOWN CIRCLE */
+.circle-wrap{
+  display:flex;align-items:center;justify-content:center;
+}
+.circle{
+  border:3px solid currentColor;
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-weight:900;
+  transition:none;
+}
+.circle-num{
+  font-family:'Inter',sans-serif;
+  font-weight:900;
+  line-height:1;
+}
+/* WORD STYLES */
+.word{
+  text-align:center;
+  line-height:1;
+  padding:0 24px;
+  letter-spacing:-0.02em;
+}
+.word .heart{
+  display:inline-block;
+}
+/* skip hint */
+#skip-hint{
+  position:absolute;
+  bottom:24px;right:24px;
+  font-size:9px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;
+  color:rgba(255,255,255,0.4);
+  z-index:50;
+  font-family:'Inter',sans-serif;
+  pointer-events:none;
+  mix-blend-mode:difference;
+}
+/* progress dashes */
+#progress{
+  position:absolute;
+  top:18px;left:20px;right:20px;
+  display:flex;gap:4px;
+  z-index:50;
+}
+.prog-dash{
+  flex:1;height:2px;
+  background:rgba(255,255,255,0.25);
+  mix-blend-mode:difference;
+}
+.prog-dash.done{background:rgba(255,255,255,0.9);}
+</style>
+</head>
+<body>
+<div id="stage">
+
+  <div id="progress"></div>
+  <div id="skip-hint">Toque para avançar →</div>
+
+  <!-- ===== FRAME 1: 5 ===== -->
+  <div class="frame active" data-bg="red" data-color="white">
+    <div class="circle-wrap">
+      <div class="circle" style="width:280px;height:280px;">
+        <span class="circle-num" style="font-size:64px;">5</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== FRAME 2: 4 ===== -->
+  <div class="frame" data-bg="blue" data-color="white">
+    <div class="circle-wrap">
+      <div class="circle" style="width:230px;height:230px;">
+        <span class="circle-num" style="font-size:54px;">4</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== FRAME 3: 3 ===== -->
+  <div class="frame" data-bg="yellow" data-color="black">
+    <div class="circle-wrap">
+      <div class="circle" style="width:185px;height:185px;">
+        <span class="circle-num" style="font-size:46px;">3</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== FRAME 4: 2 ===== -->
+  <div class="frame" data-bg="green" data-color="white">
+    <div class="circle-wrap">
+      <div class="circle" style="width:140px;height:140px;">
+        <span class="circle-num" style="font-size:38px;">2</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== FRAME 5: 1 ===== -->
+  <div class="frame" data-bg="black" data-color="yellow">
+    <div class="circle-wrap">
+      <div class="circle" style="width:95px;height:95px;">
+        <span class="circle-num" style="font-size:30px;">1</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== FRAME 6: BEM ===== -->
+  <div class="frame" data-bg="yellow" data-color="black">
+    <div class="word" style="font-family:'Archivo Black',sans-serif; font-size:96px; font-style:italic; transform:skewX(-6deg);">
+      BEM
+    </div>
+  </div>
+
+  <!-- ===== FRAME 7: VINDOS ===== -->
+  <div class="frame" data-bg="black" data-color="white">
+    <div class="word" style="font-family:'Anton',sans-serif; font-size:88px; letter-spacing:0.04em;">
+      VINDOS<span style="color:var(--red);">.</span>
+    </div>
+  </div>
+
+  <!-- ===== FRAME 8: heart emoji ===== -->
+  <div class="frame" data-bg="red" data-color="white">
+    <div class="word" style="font-family:'Playfair Display',serif; font-style:italic; font-size:110px; font-weight:900;">
+      ♡
+    </div>
+  </div>
+
+  <!-- ===== FRAME 9: A NOITE ===== -->
+  <div class="frame" data-bg="blue" data-color="white">
+    <div class="word" style="font-family:'Bebas Neue',sans-serif; font-size:78px; line-height:1.05;">
+      A NOITE<br>É NOSSA
+    </div>
+  </div>
+
+  <!-- ===== FRAME 10: APROVEITEM ===== -->
+  <div class="frame" data-bg="green" data-color="white">
+    <div class="word" style="font-family:'Oswald',sans-serif; font-weight:700; font-size:64px; text-transform:uppercase; letter-spacing:0.06em; line-height:1.1;">
+      APROVEITEM<br><span style="font-weight:300; font-style:italic; font-size:0.6em;">cada minuto</span>
+    </div>
+  </div>
+
+  <!-- ===== FRAME 11: small caps "uh uh uh" style word stack ===== -->
+  <div class="frame" data-bg="black" data-color="white">
+    <div class="word" style="font-family:'Space Mono',monospace; font-size:42px; line-height:1.6; text-align:left;">
+      AMOR<br>AMOR<br>AMOR <span style="color:var(--red);">♡</span>
+    </div>
+  </div>
+
+  <!-- ===== FRAME 12: COM QUEM ===== -->
+  <div class="frame" data-bg="purple" data-color="white">
+    <div class="word" style="font-family:'Playfair Display',serif; font-style:italic; font-weight:700; font-size:68px; line-height:1.1;">
+      com quem<br>a gente ama
+    </div>
+  </div>
+
+  <!-- ===== FRAME 13: DE VERDADE ===== -->
+  <div class="frame" data-bg="yellow" data-color="black">
+    <div class="word" style="font-family:'Archivo Black',sans-serif; font-size:80px; line-height:1; letter-spacing:-0.03em;">
+      DE<br>VERDADE
+    </div>
+  </div>
+
+  <!-- ===== FRAME 14: heart x3 grid ===== -->
+  <div class="frame" data-bg="red" data-color="white">
+    <div class="word" style="font-size:72px; line-height:1.3;">
+      ♡ ♡ ♡
+    </div>
+  </div>
+
+  <!-- ===== FRAME 15: NOSSO ===== -->
+  <div class="frame" data-bg="blue" data-color="white">
+    <div class="word" style="font-family:'Anton',sans-serif; font-size:100px; letter-spacing:0.02em;">
+      NOSSO
+    </div>
+  </div>
+
+  <!-- ===== FRAME 16: CARDÁPIO ===== -->
+  <div class="frame" data-bg="cream" data-color="black">
+    <div class="word" style="font-family:'Inter',sans-serif; font-weight:900; font-size:84px; letter-spacing:-0.04em; text-transform:uppercase;">
+      CARDÁPIO<span style="color:var(--red);">.</span>
+    </div>
+  </div>
+
+  <!-- ===== FRAME 17: final - transition out ===== -->
+  <div class="frame" data-bg="black" data-color="white">
+    <div class="word" style="font-family:'Playfair Display',serif; font-style:italic; font-weight:900; font-size:56px; line-height:1.2;">
+      com amor,<br>boa noite ♡
+    </div>
+  </div>
+
+</div>
+
+<script>
+const colors={
+  red:'#E8003C', blue:'#0042FF', yellow:'#FFE033', green:'#006B3C',
+  black:'#0C0C0C', white:'#FFFFFF', cream:'#F4F1E8', purple:'#6B00FF'
+};
+const frames=document.querySelectorAll('.frame');
+const stage=document.getElementById('stage');
+const progress=document.getElementById('progress');
+let current=0;
+let autoTimer=null;
+const BEAT=550;
+
+frames.forEach(()=>{
+  const d=document.createElement('div');
+  d.className='prog-dash';
+  progress.appendChild(d);
+});
+const dashes=document.querySelectorAll('.prog-dash');
+
+function applyFrame(idx){
+  frames.forEach((f,i)=>{
+    f.classList.toggle('active', i===idx);
+    if(i===idx){
+      const bg=f.dataset.bg;
+      const col=f.dataset.color;
+      stage.style.background = colors[bg] || bg;
+      f.style.color = colors[col] || col;
+    }
+  });
+  dashes.forEach((d,i)=>d.classList.toggle('done', i<=idx));
+}
+
+function next(){
+  current++;
+  if(current>=frames.length){
+    finishIntro();
+    return;
+  }
+  applyFrame(current);
+}
+
+function startAuto(){
+  clearTimeout(autoTimer);
+  autoTimer=setTimeout(()=>{ next(); startAuto(); }, BEAT);
+}
+
+function finishIntro(){
+  clearTimeout(autoTimer);
+  document.getElementById('skip-hint').style.display='none';
+  document.getElementById('progress').style.display='none';
+  stage.style.transition='opacity 0.4s';
+  stage.style.opacity='0';
+  setTimeout(()=>{
+    document.body.innerHTML='<div style="display:flex;align-items:center;justify-content:center;height:100vh;font-family:Inter,sans-serif;color:#888;font-size:13px;text-align:center;padding:24px;">Aqui entraria a transi&ccedil;&atilde;o para o app do card&aacute;pio.<br><br>(Substitua este bloco pelo redirecionamento ou pelo conte&uacute;do do app.)</div>';
+  },400);
+}
+
+stage.addEventListener('click', ()=>{
+  clearTimeout(autoTimer);
+  next();
+  startAuto();
+});
+
+applyFrame(0);
+startAuto();
+</script>
+</body>
+</html>
