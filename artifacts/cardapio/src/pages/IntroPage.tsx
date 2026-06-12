@@ -39,120 +39,120 @@ function Word({ children, style }: { children: React.ReactNode; style?: React.CS
 
 const FRAMES: { bg: string; color: string; content: React.ReactNode }[] = [
   // 1 — countdown 5
-  { bg: 'red', color: 'white', content: <Circle size={280} num={5} /> },
+  { bg: 'red', color: 'white', content: <Circle size={260} num={5} /> },
   // 2 — countdown 4
-  { bg: 'blue', color: 'white', content: <Circle size={230} num={4} /> },
+  { bg: 'blue', color: 'white', content: <Circle size={210} num={4} /> },
   // 3 — countdown 3
-  { bg: 'yellow', color: 'black', content: <Circle size={185} num={3} /> },
+  { bg: 'yellow', color: 'black', content: <Circle size={168} num={3} /> },
   // 4 — countdown 2
-  { bg: 'green', color: 'white', content: <Circle size={140} num={2} /> },
+  { bg: 'green', color: 'white', content: <Circle size={126} num={2} /> },
   // 5 — countdown 1
-  { bg: 'black', color: 'yellow', content: <Circle size={95} num={1} /> },
-  // 6 — BEM
+  { bg: 'black', color: 'yellow', content: <Circle size={84} num={1} /> },
+  // 6 — BEM  (3 chars, Archivo Black wide → ~22vw safe)
   {
     bg: 'yellow', color: 'black',
     content: (
-      <Word style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: 96, fontStyle: 'italic', transform: 'skewX(-6deg)' }}>
+      <Word style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: 'clamp(56px, 21vw, 96px)', fontStyle: 'italic', transform: 'skewX(-6deg)' }}>
         BEM
       </Word>
     ),
   },
-  // 7 — VINDOS.
+  // 7 — VINDOS.  (7 chars, Anton condensed → ~19vw)
   {
     bg: 'black', color: 'white',
     content: (
-      <Word style={{ fontFamily: "'Anton', sans-serif", fontSize: 88, letterSpacing: '0.04em' }}>
+      <Word style={{ fontFamily: "'Anton', sans-serif", fontSize: 'clamp(52px, 19vw, 88px)', letterSpacing: '0.04em' }}>
         VINDOS<span style={{ color: C.red }}>.</span>
       </Word>
     ),
   },
-  // 8 — ♡
+  // 8 — ♡  (single char, no overflow risk)
   {
     bg: 'red', color: 'white',
     content: (
-      <Word style={{ fontFamily: "'Playfair Display', serif", fontStyle: 'italic', fontSize: 110, fontWeight: 900 }}>
+      <Word style={{ fontFamily: "'Playfair Display', serif", fontStyle: 'italic', fontSize: 'clamp(72px, 26vw, 110px)', fontWeight: 900 }}>
         ♡
       </Word>
     ),
   },
-  // 9 — A NOITE É NOSSA
+  // 9 — A NOITE É NOSSA  (Bebas Neue very condensed → fine at 17vw)
   {
     bg: 'blue', color: 'white',
     content: (
-      <Word style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 78, lineHeight: 1.05 }}>
+      <Word style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(48px, 17vw, 78px)', lineHeight: 1.05 }}>
         A NOITE<br />É NOSSA
       </Word>
     ),
   },
-  // 10 — APROVEITEM
+  // 10 — APROVEITEM  (10 chars Oswald, widest word → 10vw cap)
   {
     bg: 'green', color: 'white',
     content: (
-      <Word style={{ fontFamily: "'Oswald', sans-serif", fontWeight: 700, fontSize: 64, textTransform: 'uppercase', letterSpacing: '0.06em', lineHeight: 1.1 }}>
+      <Word style={{ fontFamily: "'Oswald', sans-serif", fontWeight: 700, fontSize: 'clamp(32px, 10vw, 52px)', textTransform: 'uppercase', letterSpacing: '0.06em', lineHeight: 1.1 }}>
         APROVEITEM<br />
-        <span style={{ fontWeight: 300, fontStyle: 'italic', fontSize: '0.6em' }}>cada minuto</span>
+        <span style={{ fontWeight: 300, fontStyle: 'italic', fontSize: '0.65em' }}>cada minuto</span>
       </Word>
     ),
   },
-  // 11 — AMOR x3
+  // 11 — AMOR x3  (Space Mono monospace, 4 chars → safe at 12vw)
   {
     bg: 'black', color: 'white',
     content: (
-      <Word style={{ fontFamily: "'Space Mono', monospace", fontSize: 42, lineHeight: 1.6, textAlign: 'left' }}>
+      <Word style={{ fontFamily: "'Space Mono', monospace", fontSize: 'clamp(28px, 10vw, 42px)', lineHeight: 1.6, textAlign: 'left' }}>
         AMOR<br />AMOR<br />AMOR <span style={{ color: C.red }}>♡</span>
       </Word>
     ),
   },
-  // 12 — com quem a gente ama
+  // 12 — com quem / a gente ama  ("a gente ama" = 11 chars Playfair → 11vw)
   {
     bg: 'purple', color: 'white',
     content: (
-      <Word style={{ fontFamily: "'Playfair Display', serif", fontStyle: 'italic', fontWeight: 700, fontSize: 68, lineHeight: 1.1 }}>
+      <Word style={{ fontFamily: "'Playfair Display', serif", fontStyle: 'italic', fontWeight: 700, fontSize: 'clamp(36px, 11vw, 58px)', lineHeight: 1.15 }}>
         com quem<br />a gente ama
       </Word>
     ),
   },
-  // 13 — DE VERDADE
+  // 13 — DE VERDADE  ("VERDADE" = 7 chars Archivo Black wide → 15vw)
   {
     bg: 'yellow', color: 'black',
     content: (
-      <Word style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: 80, lineHeight: 1, letterSpacing: '-0.03em' }}>
+      <Word style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: 'clamp(46px, 15vw, 72px)', lineHeight: 1, letterSpacing: '-0.03em' }}>
         DE<br />VERDADE
       </Word>
     ),
   },
-  // 14 — ♡ ♡ ♡
+  // 14 — ♡ ♡ ♡  ("♡ ♡ ♡" with spaces → 3 glyphs, use 16vw)
   {
     bg: 'red', color: 'white',
     content: (
-      <Word style={{ fontSize: 72, lineHeight: 1.3 }}>
+      <Word style={{ fontSize: 'clamp(46px, 16vw, 72px)', lineHeight: 1.3 }}>
         ♡ ♡ ♡
       </Word>
     ),
   },
-  // 15 — NOSSO
+  // 15 — NOSSO  (5 chars Anton condensed → 22vw fine)
   {
     bg: 'blue', color: 'white',
     content: (
-      <Word style={{ fontFamily: "'Anton', sans-serif", fontSize: 100, letterSpacing: '0.02em' }}>
+      <Word style={{ fontFamily: "'Anton', sans-serif", fontSize: 'clamp(64px, 22vw, 100px)', letterSpacing: '0.02em' }}>
         NOSSO
       </Word>
     ),
   },
-  // 16 — CARDÁPIO.
+  // 16 — CARDÁPIO.  (9 chars Inter 900 wide → 13vw)
   {
     bg: 'cream', color: 'black',
     content: (
-      <Word style={{ fontFamily: 'Inter, sans-serif', fontWeight: 900, fontSize: 'clamp(56px, 18vw, 84px)', letterSpacing: '-0.04em', textTransform: 'uppercase' }}>
+      <Word style={{ fontFamily: 'Inter, sans-serif', fontWeight: 900, fontSize: 'clamp(42px, 13vw, 68px)', letterSpacing: '-0.04em', textTransform: 'uppercase' }}>
         CARDÁPIO<span style={{ color: C.red }}>.</span>
       </Word>
     ),
   },
-  // 17 — com amor, boa noite
+  // 17 — com amor, boa noite  ("boa noite ♡" = 11 chars Playfair → 12vw)
   {
     bg: 'black', color: 'white',
     content: (
-      <Word style={{ fontFamily: "'Playfair Display', serif", fontStyle: 'italic', fontWeight: 900, fontSize: 56, lineHeight: 1.2 }}>
+      <Word style={{ fontFamily: "'Playfair Display', serif", fontStyle: 'italic', fontWeight: 900, fontSize: 'clamp(36px, 12vw, 56px)', lineHeight: 1.2 }}>
         com amor,<br />boa noite ♡
       </Word>
     ),
